@@ -35,16 +35,22 @@
 (function(){
 var T=496826735;
 function h(s){var h1=0xdeadbeef,h2=0x41c6ce57;for(var i=0;i<s.length;i++){var c=s.charCodeAt(i);h1=Math.imul(h1^c,2654435761);h1^=h1>>>16;h1=Math.imul(h1,2246822507);h1^=h1>>>13;h2=Math.imul(h2^c,2654435761);h2^=h2>>>16;h2=Math.imul(h2,2246822507);h2^=h2>>>13;}return (h2*2097152+(h1>>>11))>>>0;}
-window.__resumeGo=function(){
-  var v=document.getElementById('__p').value;
-  if(h(v)===T){try{sessionStorage.setItem('resume_ok','1');}catch(e){}location.reload();}
-  else{document.getElementById('__e').textContent='密码不对，请再试一次';}
-};
-window.__resumeKey=function(ev){if(ev.key==='Enter'){window.__resumeGo();}};
-try{if(sessionStorage.getItem('resume_ok')==='1')return;}catch(e){}
-document.open();
-document.write('<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Jie Zhou — Resume</title><style>body{font-family:system-ui,-apple-system,sans-serif;background:#f7f6f3;color:#1f2937;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0}.box{background:#fff;border:1px solid #e5e1d8;padding:36px;border-radius:12px;text-align:center;max-width:320px;width:90%}input{padding:10px;width:100%;box-sizing:border-box;margin:12px 0;border-radius:6px;border:1px solid #d1d5db;font-size:16px}button{background:#1d4ed8;color:#fff;border:none;padding:10px 24px;border-radius:6px;font-weight:bold;cursor:pointer;font-size:16px}.err{color:#dc2626;font-size:14px;min-height:20px}</style></head><body><div class="box"><h2>🔒 Jie Zhou — Resume</h2><p style="color:#6b7280">This page is private. Please enter the password.</p><div class="err" id="__e"></div><input type="password" id="__p" placeholder="Password" onkeydown="window.__resumeKey(event)"><br><button onclick="window.__resumeGo()">View</button></div></body></html>');
-document.close();
+function showLock(){
+document.title='Locked';
+var css='html,body{height:100%}body{font-family:system-ui,-apple-system,sans-serif;background:#f7f6f3;color:#1f2937;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0}.box{background:#ffffff;border:1px solid #e5e1d8;padding:36px;border-radius:12px;text-align:center;max-width:320px;width:90%}input{padding:10px;width:100%;box-sizing:border-box;margin:12px 0;border-radius:6px;border:1px solid #e5e1d8;font-size:16px;background:#fff;color:#111}button{background:#1d4ed8;color:#ffffff;border:none;padding:10px 24px;border-radius:6px;font-weight:bold;cursor:pointer;font-size:16px}.err{color:#dc2626;font-size:14px;min-height:20px}';
+var st=document.createElement('style');st.textContent=css;document.head.appendChild(st);
+document.body.innerHTML='<div class="box"><h2>\U0001f512 Jie Zhou \u2014 Resume</h2><p style="color:#6b7280">This page is private. Please enter the password.</p><div class="err" id="__e"></div><input type="password" id="__p" placeholder="Password"><br><button id="__b">View</button></div>';
+document.documentElement.style.display='';
+function go(){var v=document.getElementById('__p').value;if(h(v)===T){try{sessionStorage.setItem('resume_ok','1');}catch(e){}location.reload();}else{document.getElementById('__e').textContent='Wrong password, try again.';}}
+document.getElementById('__b').addEventListener('click',go);
+document.getElementById('__p').addEventListener('keydown',function(e){if(e.key==='Enter')go();});
+setTimeout(function(){var i=document.getElementById('__p');if(i)i.focus();},50);
+}
+var ok=false;
+try{ok=sessionStorage.getItem('resume_ok')==='1';}catch(e){}
+if(ok)return;
+document.documentElement.style.display='none';
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',showLock);}else{showLock();}
 })();
 </script>
 </head>
